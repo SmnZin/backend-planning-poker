@@ -13,6 +13,16 @@ const io = socketIo(server, {
     }
 });
 
+app.get('/', async(req,res)=>{
+    try{
+        const rooms = await Room.find();
+        res.json({ status: 'ok', rooms });
+    } catch(error)
+    {
+        res.stauts(500).json({ status: 'error', message: 'error al verificar el estado de la base de datos'});
+    }
+});
+
 const PORT = process.env.PORT || 4000;
 const secretKey = process.env.SECRETKEY || 'secretkey';
 

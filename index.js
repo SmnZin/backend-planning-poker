@@ -4,6 +4,7 @@ const socketIo = require('socket.io');
 const connectDB = require('./db');
 const CryptoJS = require('crypto-js');
 const { Message, Round, Room } = require('./models');
+const cors = require('cors');
 
 const app = express();
 const server = http.createServer(app);
@@ -12,6 +13,8 @@ const io = socketIo(server, {
         origin: '*',
     }
 });
+
+app.use(cors());
 
 app.get('/', async(req,res)=>{
     try{
